@@ -35,14 +35,13 @@ int main(int argc, char **argv) {
         switch (code[pptr]) {
             case '+': ++ mem[mptr]; break;
             case '-': -- mem[mptr]; break;
-            case '>': ++ mptr; break;
-            case '<': -- mptr; break;
+            case '>': ++ mptr; if (mem.size() <= mptr) return 1; break;
+            case '<': -- mptr; if (mptr < 0) return 1; break;
             case ',': mem[mptr] = cin.get(); if (not cin) mem[mptr] = -1; break;
             case '.': cout << mem[mptr]; cout.flush(); break;
             case '[': pptr = match[pptr] - 1; break;
             case ']': if (mem[mptr]) pptr = match[pptr]; break;
         }
-        if (mptr < 0 or mem.size() <= mptr) return 1;
         pptr += 1;
     }
     return 0;
